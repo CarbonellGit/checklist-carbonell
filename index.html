@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Checklist Integração - Colégio Carbonell</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #F9F9F9;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      border: 5px solid #A1001F;
+      border-radius: 15px;
+      background-color: #fff;
+    }
+    h1 {
+      text-align: center;
+      color: #A1001F;
+    }
+    h2 {
+      color: #A1001F;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    input[type="text"], select {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #A1001F;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+    }
+    button:hover {
+      background-color: #820018;
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 20px auto; 
+      max-width: 200px; 
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <img src="ColegioCarbonell.svg" alt="Logo Colégio Carbonell" class="logo">
+  <h1>Checklist de Integração</h1>
+  <form id="checklistForm">
+    <h2>Dados do Colaborador</h2>
+    <label>Nome do Colaborador:
+      <input type="text" name="nomeColaborador" required>
+    </label>
+    <label>Setor:
+      <select name="setor" required>
+        <option value="">Selecione o setor</option>
+        <option value="TI">TI</option>
+        <option value="RH">RH</option>
+        <option value="Financeiro">Financeiro</option>
+        <option value="Pedagogico">Pedagógico</option>
+        <option value="Administrativo">Administrativo</option>
+        <option value="Infraestrutura">Infraestrutura</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Monitoria">Comercial</option>
+        <option value="Outros">Outros</option>
+      </select>
+    </label>
+
+    <h2>Acessos Digitais</h2>
+    <label><input type="checkbox" name="email">E-mail institucional criado e testado</label>
+    <label><input type="checkbox" name="2fa">Verificação em 2 etapas (2FA) ativada</label>
+    <label><input type="checkbox" name="celular">Configuração feita no celular (opcional)</label>
+    <label><input type="checkbox" name="chromebook">Acesso realizado pelo Chromebook (com apoio do TI)</label>
+    
+    <h2>Wi-Fi</h2>
+    <label><input type="checkbox" name="wifi">Conectado à rede CARBONELL com e-mail institucional</label>
+    
+    <h2>Comunicação Interna</h2>
+    <label><input type="checkbox" name="slack">Acesso ao Slack realizado</label>
+    <label><input type="checkbox" name="slackCelular">Aplicativo instalado no celular (opcional)</label>
+    
+    <h2>Plataformas Internas (conforme o setor)</h2>
+    <label><input type="checkbox" name="sas">SAS</label>
+    <label><input type="checkbox" name="layers">Layers</label>
+    <label><input type="checkbox" name="sophia">Sophia</label>
+    <label><input type="checkbox" name="saa">SAA</label>
+    <label><input type="checkbox" name="rede">Usuário de rede (Windows)</label>
+    <label><input type="checkbox" name="lms">LMS - Central de Treinamento</label>
+    
+    <h2>Portal do Colaborador</h2>
+    <label><input type="checkbox" name="portal">Acesso feito via site do Colégio</label>
+    <label><input type="checkbox" name="agendas">Agendas institucionais configuradas</label>
+    <label><input type="checkbox" name="canais">Canais relevantes identificados</label>
+    
+    <h2>Primeiro acesso via Chromebook</h2>
+    <label><input type="checkbox" name="loginChrome">Login com conta institucional realizado com sucesso</label>
+    <label><input type="checkbox" name="2faChrome">Verificação em 2 etapas ativada com o dispositivo</label>
+    <label><input type="checkbox" name="sistemasChrome">Acesso aos principais sistemas testado com o Time de TI</label>
+    
+    <button type="button" onclick="enviarFormulario()">Enviar Checklist</button>
+  </form>
+
+  <script>
+    function enviarFormulario() {
+      const form = document.getElementById('checklistForm');
+      const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+      const nomeColaborador = form.querySelector('input[name="nomeColaborador"]').value;
+      const setor = form.querySelector('select[name="setor"]').value;
+      const data = {};
+      
+      // Adicionar Nome e Setor
+      data.nomeColaborador = nomeColaborador;
+      data.setor = setor;
+
+      // Adicionar estados dos checkboxes
+      checkboxes.forEach(checkbox => {
+        data[checkbox.name] = checkbox.checked ? "Sim" : "Não";
+      });
+
+      // Adicionar data/hora do envio
+      data.timestamp = new Date().toLocaleString('pt-BR');
+
+      fetch('https://script.google.com/macros/s/AKfycbyeekz7KiwZj6T6cv9XoziKwOLH0iaIJ1AYu63eFzndwWXZyzLwC9n24CK_imTc8ICc/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert('Checklist enviado com sucesso!');
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Erro ao enviar:', error);
+        alert('Erro ao enviar o checklist. Tente novamente.');
+      });
+    }
+  </script>
+</body>
+</html>
