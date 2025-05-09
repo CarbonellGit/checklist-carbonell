@@ -79,6 +79,7 @@ Para que o formulário funcione corretamente, é necessário configurar um scrip
          data.wifi,
          data.slack,
          data.slackCelular,
+         data.dicasseguranca,
          data.sas,
          data.layers,
          data.sophia,
