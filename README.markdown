@@ -4,7 +4,7 @@
 
 Este projeto é um formulário web desenvolvido para facilitar o processo de integração de novos colaboradores no Colégio Carbonell. O formulário é um checklist que registra informações essenciais sobre o colaborador e verifica a configuração de acessos digitais, conexões de rede, plataformas internas e outros recursos necessários para o início de suas atividades. As informações preenchidas no formulário são enviadas e armazenadas em uma planilha do Google Sheets por meio de uma API Google Apps Script.
 
-O projeto é hospedado no **GitHub Pages** e está acessível em: [https://carbonellgit.github.io/checklist-carbonell/](https://carbonellgit.github.io/checklist-carbonell/).
+O projeto é hospedado como uma aplicação web no GitHub Pages, e o link de acesso é distribuído internamente pela equipe de TI.
 
 ## Funcionalidades
 
@@ -29,7 +29,7 @@ O projeto é hospedado no **GitHub Pages** e está acessível em: [https://carbo
 ## Como Usar
 
 1. **Acesse o Formulário**:
-   - Visite [https://carbonellgit.github.io/checklist-carbonell/](https://carbonellgit.github.io/checklist-carbonell/).
+   - Utilize o link da aplicação web fornecido internamente pela equipe de TI.
 2. **Preencha o Checklist**:
    - A assistente de TI e o novo colaborador devem preencher o formulário juntos.
    - Insira o nome do colaborador e selecione o setor.
